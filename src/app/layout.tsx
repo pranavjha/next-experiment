@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from 'next/link'
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -22,12 +24,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const links = [
+    {href: `/peoplehub/people/1`, id: 1, name: 'Person 1'},
+    {href: `/peoplehub/people/2`, id: 2, name: 'Person 2'},
+    {href: `/peoplehub/people/3`, id: 3, name: 'Person 3'},
+    {href: '/', id: 4, name: 'Home'},
+  ]
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header>Header</header>
         {children}
+        <footer>
+        <ul>
+          {links.map((link) => (
+            <li key={link.id}>
+              <Link href={link.href}>{link.name}</Link>
+            </li>
+          ))}
+        </ul>
+
+
+        </footer>
       </body>
     </html>
   );
